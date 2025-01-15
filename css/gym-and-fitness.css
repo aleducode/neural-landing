@@ -373,7 +373,7 @@ footer .nav-link {
     }
 
     #rs-gym-and-fitness-01 .tp-bgimg {
-        background-image: url("../images/oe.jpg") !important;
+        background-image: url("../images/functional.jpeg") !important;
     }
 
 }
@@ -474,5 +474,15 @@ footer .nav-link {
 
     .header-push-button {
         padding-left: 0;
+    }
+
+}
+
+@media (max-width: 767px) {
+    video {
+        pointer-events: none;
+    }
+    .w-80 {
+        width: 100% !important;
     }
 }
