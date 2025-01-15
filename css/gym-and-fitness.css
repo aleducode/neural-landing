@@ -481,6 +481,8 @@ footer .nav-link {
 @media (max-width: 767px) {
     video {
         pointer-events: none;
+        z-index: -1;
+        position: relative;
     }
     .w-80 {
         width: 100% !important;
