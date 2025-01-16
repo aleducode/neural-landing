@@ -75,15 +75,18 @@
         <!-- end navigation -->
         <!-- start hamburger menu -->
         <div class="push-menu hamburger-nav header-dark hamburger-menu-half push-menu-left bg-dark-gray md-w-60 sm-w-100"
-            style="background-image: url(images/image.jpg)">
+            style="background-image: url(images/image.webp)">
             <span class="close-menu text-dark-gray bg-white"><i class="fa-solid fa-xmark"></i></span>
-            <div class="d-flex flex-column justify-content-center h-100 ps-19 pe-19 pt-13 pb-13 xl-p-12 sm-p-20px">
+            <div class="d-flex flex-column justify-content-center h-100 ps-19 pe-19 pt-13 pb-13 xl-p-12 sm-p-20px
+            opacity-full-black
+            ">
                 <div>
                     <a class="hamburger-logo" href="/">
                         <img src="images/neural.png" data-at2x="images/neural.png" alt="">
                     </a>
                 </div>
-                <div class="hamburger-menu menu-list-wrapper w-80 lg-w-100 lg-no-margin sm-mt-auto sm-mb-auto"
+                <div class="hamburger-menu menu-list-wrapper w-80 lg-w-100 lg-no-margin sm-mt-auto sm-mb-auto
+                "
                     data-scroll-options='{ "theme": "light" }'>
                     <ul class="menu-item-list fw-500 ls-1px">
                         <li class="menu-item"><a href="/" class="nav-link">Inicio</a></li>
@@ -132,7 +135,7 @@
                             data-description="">
                             <!-- slide background image -->
 
-                            <img src="images/image.jpg" alt="slider-image" data-bgposition="center center"
+                            <img src="images/image.webp" alt="slider-image" data-bgposition="center center"
                                 data-duration="2500" data-ease="Power3.easeInOut" class="rev-slidebg" data-no-retina>
                             <!-- start main row -->
                             <div id="rrzm_638" class="rev_row_zone rev_row_zone_middle">
@@ -428,8 +431,9 @@
                         data-top-bottom="transform:rotate(10deg) translateY(-50px)">
                         <img src="images/demo-gym-and-fitness-home-02.webp" alt="">
                     </div>
-                    <video src="images/video.mp4" class="w-100 border-radius-10px" autoplay loop muted
-                        style="pointer-events: none;"></video>
+                    <div class="lazy-video" data-video-src="images/video.mp4" data-video-class="w-100 border-radius-10px">
+                        <div class="video-placeholder"></div>
+                    </div>
                     <div class="position-absolute right-minus-100px bottom-0px md-right-minus-30px d-none d-md-inline-block"
                         data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)"
                         style="">
@@ -641,7 +645,7 @@
                                 </div>
                                 <div class="col-lg-7 col-md-6 offset-xl-1">
                                     <div class="h-100 outside-box-right-20 cover-background img-fluid"
-                                        style="background-image: url(images/senior1.jpg)"></div>
+                                        style="background-image: url(images/senior1.webp)"></div>
                                 </div>
                             </div>
                         </div>
@@ -662,7 +666,7 @@
                                 </div>
                                 <div class="col-lg-7 col-md-6 offset-xl-1">
                                     <div class="h-100 outside-box-right-20 cover-background img-fluid"
-                                        style="background-image: url(images/fisico1.png)"></div>
+                                        style="background-image: url(images/fisico1.webp)"></div>
                                 </div>
                             </div>
                         </div>
@@ -736,7 +740,7 @@
                 <div class="col-lg-6 md-mb-50px xs-mb-60px"
                     data-anime='{ "translateX": [-30, 0], "translateY": [50, 0], "opacity": [0,1], "duration": 1500, "delay": 100, "staggervalue": 200, "easing": "easeOutQuad" }'>
                     <figure class="position-relative w-80 ms-auto">
-                        <video src="images/neuro.mp4" class="w-100 border-radius-10px" autoplay loop muted></video>
+                        <div class="lazy-video" data-video-src="images/neuro.mp4" data-video-class="w-100 border-radius-10px"></div>
                         </figcaption>
                     </figure>
                 </div>
@@ -873,7 +877,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative cover-background"
-                                    style="background-image:url('images/camila.jpg');">
+                                    style="background-image:url('images/camila.webp');">
                                     <span
                                         class="fs-190 fw-700 alt-font text-white position-absolute left-minus-30px bottom-minus-50px">01.</span>
                                 </div>
@@ -1133,16 +1137,6 @@
     <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
     <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
 
-    <!-- slider revolution extension scripts. ONLY NEEDED FOR LOCAL TESTING -->
-    <!-- <script type="text/javascript" src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.migration.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script> -->
     <!-- Slider's main "init" script -->
     <script type="text/javascript">
         /* https://learn.jquery.com/using-jquery-core/document-ready/ */
@@ -1248,6 +1242,7 @@
         });
     </script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
 </body>
 
 </html>
