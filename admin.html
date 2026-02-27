@@ -7,297 +7,662 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <link rel="shortcut icon" href="images/brain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
         :root {
-            --neural-green: #8ece56;
-            --neural-dark: #1a1a1a;
+            --background: #fafafa;
+            --foreground: #0a0a0a;
+            --card: #ffffff;
+            --card-foreground: #0a0a0a;
+            --muted: #f5f5f5;
+            --muted-foreground: #737373;
+            --border: #e5e5e5;
+            --input: #e5e5e5;
+            --primary: #18181b;
+            --primary-foreground: #fafafa;
+            --secondary: #f5f5f5;
+            --secondary-foreground: #18181b;
+            --accent: #f5f5f5;
+            --destructive: #ef4444;
+            --destructive-foreground: #fafafa;
+            --ring: #a1a1aa;
+            --radius: 0.5rem;
+            --neural: #8ece56;
         }
 
         body {
-            background: #f4f6f9;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .navbar-neural {
-            background: var(--neural-dark);
-        }
-
-        .btn-neural {
-            background: var(--neural-green);
-            color: #fff;
-            border: none;
-        }
-
-        .btn-neural:hover {
-            background: #7aba4a;
-            color: #fff;
-        }
-
-        .prof-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: box-shadow 0.2s;
-        }
-
-        .prof-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .prof-card .prof-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--neural-green);
-        }
-
-        .prof-card .prof-photo-placeholder {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #e9ecef;
-            display: flex;
+        /* ── Buttons ── */
+        .btn-sh {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid var(--neural-green);
-            color: #adb5bd;
-            font-size: 2rem;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 2.25rem;
+            padding: 0 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--foreground);
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+            white-space: nowrap;
+            outline: none;
+        }
+        .btn-sh:hover { background: var(--accent); }
+        .btn-sh:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+        .btn-sh-primary {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border-color: var(--primary);
+        }
+        .btn-sh-primary:hover { background: #27272a; color: var(--primary-foreground); }
+
+        .btn-sh-destructive {
+            background: var(--destructive);
+            color: var(--destructive-foreground);
+            border-color: var(--destructive);
+        }
+        .btn-sh-destructive:hover { background: #dc2626; color: #fff; }
+
+        .btn-sh-ghost {
+            border-color: transparent;
+            background: transparent;
+        }
+        .btn-sh-ghost:hover { background: var(--accent); }
+
+        .btn-sh-sm { height: 2rem; padding: 0 0.75rem; font-size: 0.8125rem; }
+
+        .btn-sh-icon {
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+            border-radius: var(--radius);
         }
 
-        .order-badge {
-            width: 28px;
-            height: 28px;
-            background: var(--neural-green);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
+        /* ── Card ── */
+        .card-sh {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--card-foreground);
+        }
+
+        /* ── Badge ── */
+        .badge-sh {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+        .badge-sh-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fde68a;
+        }
+        .badge-sh-neural {
+            background: #ecfccb;
+            color: #365314;
+            border-color: #d9f99d;
         }
 
+        /* ── Input / Select / Textarea ── */
+        .input-sh {
+            display: flex;
+            width: 100%;
+            height: 2.25rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-family: inherit;
+            border-radius: var(--radius);
+            border: 1px solid var(--input);
+            background: transparent;
+            color: var(--foreground);
+            transition: border-color 0.15s;
+            outline: none;
+        }
+        .input-sh::placeholder { color: var(--muted-foreground); }
+        .input-sh:focus { border-color: var(--ring); outline: 2px solid var(--ring); outline-offset: -1px; }
+
+        textarea.input-sh { height: auto; min-height: 5rem; resize: vertical; }
+        select.input-sh { appearance: auto; cursor: pointer; }
+
+        .label-sh {
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--foreground);
+        }
+
+        /* ── Separator ── */
+        .separator { height: 1px; background: var(--border); width: 100%; margin: 1rem 0; }
+
+        /* ── Login ── */
         #login-screen {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--neural-dark) 0%, #2d2d2d 100%);
+            background: var(--background);
         }
-
-        .login-box {
-            background: #fff;
-            border-radius: 16px;
-            padding: 2.5rem;
+        .login-card {
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 360px;
+            padding: 2rem;
+        }
+        .login-card h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; text-align: center; }
+        .login-card p { font-size: 0.875rem; color: var(--muted-foreground); text-align: center; margin-bottom: 1.5rem; }
+
+        .login-error {
+            font-size: 0.8125rem;
+            color: var(--destructive);
+            text-align: center;
+            margin-bottom: 0.75rem;
+            display: none;
+        }
+        .login-error.show { display: block; }
+
+        /* ── Header ── */
+        .admin-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--card);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        .admin-header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 3.5rem;
+            padding: 0 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .admin-logo img { width: 24px; height: 24px; }
+        .admin-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* ── Layout ── */
+        .admin-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+            .admin-layout { grid-template-columns: 1fr; }
         }
 
-        .photo-upload-area {
-            border: 2px dashed #dee2e6;
-            border-radius: 12px;
-            padding: 2rem;
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        /* ── Prof Card ── */
+        .prof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.1s;
+        }
+        .prof-item:last-child { border-bottom: none; }
+        .prof-item:hover { background: var(--muted); }
+
+        .prof-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--muted);
+        }
+        .prof-avatar-placeholder {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--muted-foreground);
+        }
+        .prof-avatar-placeholder svg { width: 20px; height: 20px; }
+
+        .prof-info { flex: 1; min-width: 0; }
+        .prof-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .prof-role {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+        }
+        .prof-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .order-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background: var(--muted);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--muted-foreground);
+        }
+
+        /* ── Empty State ── */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--muted-foreground);
+        }
+        .empty-state svg { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.4; }
+        .empty-state p { font-size: 0.875rem; }
+
+        /* ── Modal / Dialog ── */
+        .modal-content {
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) + 0.25rem);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 1.5rem;
+        }
+        .modal-header .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+        .modal-header .desc {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+            margin-top: 0.25rem;
+        }
+        .modal-body { padding: 1.5rem; }
+        .modal-footer {
+            border-top: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .field-group { margin-bottom: 1rem; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 576px) { .field-row { grid-template-columns: 1fr; } }
+
+        /* ── Photo Upload ── */
+        .photo-drop {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
             text-align: center;
             cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
+            transition: border-color 0.15s, background 0.15s;
         }
-
-        .photo-upload-area:hover,
-        .photo-upload-area.dragover {
-            border-color: var(--neural-green);
-            background: #f8fff4;
+        .photo-drop:hover, .photo-drop.dragover {
+            border-color: var(--ring);
+            background: var(--muted);
         }
-
-        .photo-upload-area img {
+        .photo-drop svg { width: 32px; height: 32px; color: var(--muted-foreground); margin-bottom: 0.5rem; }
+        .photo-drop p { font-size: 0.8125rem; color: var(--muted-foreground); margin: 0; }
+        .photo-drop .hint { font-size: 0.75rem; color: var(--muted-foreground); opacity: 0.7; }
+        .photo-drop img {
             max-width: 200px;
             max-height: 200px;
-            border-radius: 8px;
+            border-radius: var(--radius);
+            object-fit: cover;
         }
 
-        .preview-section {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
+        /* ── Preview ── */
+        .preview-card { overflow: hidden; }
+        .preview-tab-content { min-height: 280px; position: relative; }
+        .preview-tab-pane { display: none; }
+        .preview-tab-pane.active { display: block; }
+        .preview-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .preview-text { padding: 1.25rem; }
+        .preview-text h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.125rem; }
+        .preview-text .role { font-size: 0.75rem; color: var(--neural); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .preview-text p { font-size: 0.8125rem; color: var(--muted-foreground); line-height: 1.5; margin-top: 0.75rem; }
+        .preview-text .socials { margin-top: 0.75rem; display: flex; gap: 0.5rem; }
+        .preview-text .socials a {
+            width: 28px;
+            height: 28px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-foreground);
+            transition: background 0.15s, color 0.15s;
+            text-decoration: none;
+        }
+        .preview-text .socials a:hover { background: var(--muted); color: var(--foreground); }
+        .preview-photo {
+            background-size: cover;
+            background-position: center;
+            min-height: 280px;
+            position: relative;
+        }
+        .preview-photo .num {
+            position: absolute;
+            bottom: 8px;
+            left: 12px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            line-height: 1;
+        }
+        .preview-nav {
+            display: flex;
+            border-top: 1px solid var(--border);
+        }
+        .preview-nav button {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            transition: background 0.1s, color 0.1s;
+            border-right: 1px solid var(--border);
+        }
+        .preview-nav button:last-child { border-right: none; }
+        .preview-nav button:hover { background: var(--muted); }
+        .preview-nav button.active {
+            color: var(--foreground);
+            background: var(--muted);
+            font-weight: 600;
         }
 
-        .unsaved-badge {
-            animation: pulse 2s infinite;
+        /* ── Delete Dialog ── */
+        .delete-dialog .modal-content { max-width: 400px; margin: 0 auto; }
+        .delete-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 9999px;
+            background: #fef2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
         }
+        .delete-icon svg { width: 24px; height: 24px; color: var(--destructive); }
 
-        @keyframes pulse {
+        /* ── SVG Icons ── */
+        .icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .icon-sm { width: 14px; height: 14px; }
 
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
+        /* ── Unsaved dot ── */
+        .unsaved-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background: #f59e0b;
+            animation: blink 1.5s infinite;
         }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .hidden { display: none !important; }
+
+        /* ── Publish button ── */
+        .btn-sh-publish {
+            background: #16a34a;
+            color: #fff;
+            border-color: #16a34a;
+        }
+        .btn-sh-publish:hover { background: #15803d; color: #fff; }
+        .btn-sh-publish:disabled { opacity: 0.6; cursor: wait; }
+
+        /* ── Toast ── */
+        .admin-toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #fff;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(0.5rem);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .admin-toast.show { opacity: 1; transform: translateY(0); }
+        .admin-toast-success { background: #16a34a; }
+        .admin-toast-error { background: var(--destructive); }
     </style>
 </head>
 
 <body>
-    <!-- LOGIN SCREEN -->
+    <!-- ────── LOGIN ────── -->
     <div id="login-screen">
-        <div class="login-box text-center">
-            <img src="images/brain.png" alt="Neural" width="60" class="mb-3">
-            <h4 class="fw-bold mb-1">Panel Admin</h4>
-            <p class="text-muted mb-4">Neural Consciente</p>
+        <div class="login-card">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+                <img src="images/brain.png" alt="Neural" width="48">
+            </div>
+            <h1>Panel Admin</h1>
+            <p>Ingresa la contraseña para continuar</p>
             <form id="login-form">
-                <div class="mb-3">
-                    <input type="password" id="login-password" class="form-control form-control-lg text-center"
-                        placeholder="Contraseña" autofocus>
+                <div class="field-group">
+                    <label class="label-sh" for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" class="input-sh" placeholder="••••••••" autofocus>
                 </div>
-                <div id="login-error" class="text-danger mb-3 d-none">Contraseña incorrecta</div>
-                <button type="submit" class="btn btn-neural btn-lg w-100">Ingresar</button>
+                <div id="login-error" class="login-error">Contraseña incorrecta</div>
+                <button type="submit" class="btn-sh btn-sh-primary" style="width:100%;height:2.5rem;">Ingresar</button>
             </form>
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="admin-panel" class="d-none">
-        <nav class="navbar navbar-neural navbar-dark px-3 py-2 sticky-top">
-            <span class="navbar-brand fw-bold">
-                <img src="images/brain.png" alt="" width="28" class="me-2">Admin Neural
-                <span id="unsaved-indicator" class="badge bg-warning text-dark ms-2 unsaved-badge d-none">Sin
-                    guardar</span>
-            </span>
-            <div class="d-flex gap-2">
-                <button class="btn btn-outline-light btn-sm" onclick="Admin.importJSON()" title="Importar JSON">
-                    <i class="fas fa-file-import me-1"></i>Importar
-                </button>
-                <button class="btn btn-neural btn-sm" onclick="Admin.exportJSON()" title="Descargar JSON">
-                    <i class="fas fa-download me-1"></i>Descargar JSON
-                </button>
-                <button class="btn btn-outline-light btn-sm" onclick="Admin.logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </nav>
-
-        <div class="container-fluid py-4 px-3 px-md-4">
-            <div class="row g-4">
-                <!-- LEFT: PROF LIST -->
-                <div class="col-lg-7">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fas fa-users me-2"></i>Profes</h5>
-                        <button class="btn btn-neural btn-sm" onclick="Admin.addProf()">
-                            <i class="fas fa-plus me-1"></i>Agregar Profe
-                        </button>
-                    </div>
-                    <div id="prof-list">
-                        <!-- Rendered by JS -->
+    <!-- ────── ADMIN ────── -->
+    <div id="admin-panel" class="hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-inner">
+                <div class="admin-logo">
+                    <img src="images/brain.png" alt="">
+                    <span>Neural Admin</span>
+                    <div id="unsaved-indicator" class="hidden" style="display:flex;align-items:center;gap:0.375rem;">
+                        <div class="unsaved-dot"></div>
+                        <span class="badge-sh badge-sh-warning">Sin guardar</span>
                     </div>
                 </div>
+                <div class="admin-actions">
+                    <button class="btn-sh btn-sh-sm" onclick="Admin.importJSON()">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/></svg>
+                        Importar
+                    </button>
+                    <button class="btn-sh btn-sh-sm" onclick="Admin.exportJSON()">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12M12 16.5V3"/></svg>
+                        Descargar JSON
+                    </button>
+                    <button id="btn-publish" class="btn-sh btn-sh-publish btn-sh-sm" onclick="Admin.publish()">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"/></svg>
+                        Publicar
+                    </button>
+                    <button class="btn-sh btn-sh-ghost btn-sh-icon" onclick="Admin.logout()" title="Cerrar sesión">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
 
-                <!-- RIGHT: PREVIEW -->
-                <div class="col-lg-5">
-                    <h5 class="fw-bold mb-3"><i class="fas fa-eye me-2"></i>Vista Previa</h5>
-                    <div class="preview-section p-3">
-                        <div id="preview-tabs" class="tab-content bg-white" style="min-height: 300px;">
-                        </div>
-                        <div id="preview-nav" class="mt-3">
-                        </div>
-                    </div>
+        <!-- Main Content -->
+        <div class="admin-layout">
+            <!-- Left: Prof list -->
+            <div>
+                <div class="section-header">
+                    <h2 class="section-title">Profes</h2>
+                    <button class="btn-sh btn-sh-primary btn-sh-sm" onclick="Admin.addProf()">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                        Agregar
+                    </button>
+                </div>
+                <div id="prof-list" class="card-sh">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Right: Preview -->
+            <div>
+                <div class="section-header">
+                    <h2 class="section-title">Vista Previa</h2>
+                </div>
+                <div id="preview-container" class="card-sh preview-card">
+                    <div id="preview-tabs" class="preview-tab-content"></div>
+                    <div id="preview-nav" class="preview-nav"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- EDIT MODAL -->
+    <!-- ────── EDIT MODAL ────── -->
     <div class="modal fade" id="editModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="editModalTitle">Editar Profe</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <div>
+                        <h5 class="modal-title" id="editModalTitle">Editar Profe</h5>
+                        <p class="desc mb-0" id="editModalDesc">Completa la información del profesor</p>
+                    </div>
+                    <button type="button" class="btn-sh btn-sh-ghost btn-sh-icon" data-bs-dismiss="modal">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form id="prof-form">
                         <input type="hidden" id="prof-id">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Nombre completo</label>
-                                <input type="text" id="prof-name" class="form-control" required>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="label-sh" for="prof-name">Nombre completo</label>
+                                <input type="text" id="prof-name" class="input-sh" placeholder="Nombre del profe" required>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Rol</label>
-                                <select id="prof-role-select" class="form-select" onchange="Admin.onRoleChange()">
+                            <div class="field-group">
+                                <label class="label-sh" for="prof-role-select">Rol</label>
+                                <select id="prof-role-select" class="input-sh" onchange="Admin.onRoleChange()">
                                     <option value="NUTRICIONISTA">Nutricionista</option>
                                     <option value="FISIOTERAPEUTA">Fisioterapeuta</option>
                                     <option value="ENTRENADOR">Entrenador</option>
                                     <option value="ENTRENADORA">Entrenadora</option>
                                     <option value="custom">Otro (personalizado)</option>
                                 </select>
-                                <input type="text" id="prof-role-custom" class="form-control mt-2 d-none"
-                                    placeholder="Escribe el rol...">
+                                <input type="text" id="prof-role-custom" class="input-sh hidden" style="margin-top:0.5rem" placeholder="Escribe el rol...">
                             </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Descripción</label>
-                                <textarea id="prof-desc" class="form-control" rows="4" required></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Foto</label>
-                                <div id="photo-upload-area" class="photo-upload-area">
-                                    <div id="photo-placeholder">
-                                        <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
-                                        <p class="mb-1">Arrastra una imagen aquí o haz clic para seleccionar</p>
-                                        <small class="text-muted">JPG, PNG o WebP (max 2MB)</small>
-                                    </div>
-                                    <img id="photo-preview" class="d-none">
+                        </div>
+                        <div class="field-group">
+                            <label class="label-sh" for="prof-desc">Descripción</label>
+                            <textarea id="prof-desc" class="input-sh" rows="4" placeholder="Breve bio del profesor..." required></textarea>
+                        </div>
+                        <div class="field-group">
+                            <label class="label-sh">Foto</label>
+                            <div id="photo-upload-area" class="photo-drop">
+                                <div id="photo-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/></svg>
+                                    <p>Arrastra una imagen o haz clic para seleccionar</p>
+                                    <span class="hint">JPG, PNG o WebP &middot; Max 2MB</span>
                                 </div>
-                                <input type="file" id="photo-file" accept="image/*" class="d-none">
-                                <div class="mt-2 d-flex align-items-center gap-2">
-                                    <small class="text-muted">O ruta manual:</small>
-                                    <input type="text" id="prof-photo-path" class="form-control form-control-sm"
-                                        placeholder="images/nombre.webp" style="max-width: 300px;">
-                                </div>
+                                <img id="photo-preview" class="hidden" alt="">
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold"><i
-                                        class="fab fa-facebook-f me-1"></i>Facebook</label>
-                                <input type="url" id="prof-facebook" class="form-control"
-                                    placeholder="https://facebook.com/...">
+                            <input type="file" id="photo-file" accept="image/*" class="hidden">
+                            <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+                                <span style="font-size:0.75rem;color:var(--muted-foreground);">O ruta:</span>
+                                <input type="text" id="prof-photo-path" class="input-sh" placeholder="images/nombre.webp" style="max-width:280px;height:2rem;font-size:0.8125rem;">
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold"><i
-                                        class="fab fa-instagram me-1"></i>Instagram</label>
-                                <input type="url" id="prof-instagram" class="form-control"
-                                    placeholder="https://instagram.com/...">
+                        </div>
+                        <div class="separator"></div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="label-sh" for="prof-facebook">Facebook</label>
+                                <input type="url" id="prof-facebook" class="input-sh" placeholder="https://facebook.com/...">
+                            </div>
+                            <div class="field-group">
+                                <label class="label-sh" for="prof-instagram">Instagram</label>
+                                <input type="url" id="prof-instagram" class="input-sh" placeholder="https://instagram.com/...">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-neural" onclick="Admin.saveProf()">
-                        <i class="fas fa-save me-1"></i>Guardar
-                    </button>
+                    <button type="button" class="btn-sh" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn-sh btn-sh-primary" onclick="Admin.saveProf()">Guardar cambios</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- DELETE CONFIRM MODAL -->
-    <div class="modal fade" id="deleteModal" tabindex="-1">
+    <!-- ────── DELETE MODAL ────── -->
+    <div class="modal fade delete-dialog" id="deleteModal" tabindex="-1">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body text-center py-4">
-                    <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
-                    <h5 class="fw-bold">Eliminar profe?</h5>
-                    <p class="text-muted mb-0" id="delete-prof-name"></p>
+                <div class="modal-body" style="padding:2rem;text-align:center;">
+                    <div class="delete-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>
+                    </div>
+                    <h5 style="font-size:1.125rem;font-weight:600;margin-bottom:0.5rem;">Eliminar profe</h5>
+                    <p style="font-size:0.875rem;color:var(--muted-foreground);margin-bottom:0;" id="delete-prof-name"></p>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" onclick="Admin.confirmDelete()">
-                        <i class="fas fa-trash me-1"></i>Eliminar
-                    </button>
+                <div class="modal-footer" style="justify-content:center;">
+                    <button type="button" class="btn-sh" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn-sh btn-sh-destructive" onclick="Admin.confirmDelete()">Eliminar</button>
                 </div>
             </div>
         </div>

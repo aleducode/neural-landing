@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  var API_URL = '/api/profes';
   var DATA_URL = 'data/profes.json';
 
   function padNumber(n) {
@@ -67,11 +68,28 @@
   }
 
   function loadProfes() {
+    var data = null;
+
+    // Try KV API first
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', DATA_URL, false); // synchronous to load before main.js
+    xhr.open('GET', API_URL, false);
+    try {
+      xhr.send();
+      if (xhr.status === 200) {
+        data = JSON.parse(xhr.responseText);
+        if (data.profes && data.profes.length > 0) {
+          render(data);
+          return;
+        }
+      }
+    } catch (e) { /* API unavailable (local dev, etc.) */ }
+
+    // Fallback to static JSON
+    xhr = new XMLHttpRequest();
+    xhr.open('GET', DATA_URL, false);
     xhr.send();
     if (xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
+      data = JSON.parse(xhr.responseText);
       render(data);
     }
   }
