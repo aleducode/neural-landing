@@ -1,0 +1,52 @@
+{
+  "profes": [
+    {
+      "id": "prof-001",
+      "order": 1,
+      "name": "María Camila Muñoz Marín",
+      "role": "NUTRICIONISTA",
+      "description": "Nutricionista - Dietista de la UdeA, certificada en ISAK 1 y Especialista en Nutrición y Suplementación en Deportes y Ejercicio Físico (Dynamica) Business & Sciencie Society - DBSS International. Ex Deportista de Alto Rendimiento en natación carreras, Soy apasionada por la Nutrición Deportiva y la alimentación saludable.",
+      "photo": "images/camila.webp",
+      "social": {
+        "facebook": "https://www.facebook.com/NeuralConsciente",
+        "instagram": "https://instagram.com/mariamunoznutricionista?igshid=Y2I2MzMwZWM3ZA=="
+      }
+    },
+    {
+      "id": "prof-002",
+      "order": 2,
+      "name": "Susana Franco Escobar",
+      "role": "FISIOTERAPEUTA",
+      "description": "Fisioterapeuta de la Fundación Universitaria María Cano 2018, soy apasionada por el movimiento corporal humano, la prevención y rehabilitación de lesiones osteomusculares, Fundadora de Neural, Centro de Entrenamiento. Fui Fisioterapeuta de la Selección Colombia sub20 de Fútbol Playa, realicé la práctica universitaria en el Club Atlético Nacional y me encanta el deporte.",
+      "photo": "images/su.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/NeuralConsciente",
+        "instagram": "https://www.instagram.com/susifranco.fisio/"
+      }
+    },
+    {
+      "id": "prof-003",
+      "order": 3,
+      "name": "Mateo Escudero Orozco",
+      "role": "ENTRENADOR",
+      "description": "Técnico y Tecnólogo en Entrenamiento Físico y Deportivo, destacado en competencias dentro del marco de la actividad física, tales como: Rumba, cardio step, entrenamiento funcional, musculación y preparación física con énfasis en el desarrollo del ámbito deportivo. \"Todo logro empieza con la decisión de intentarlo\"",
+      "photo": "images/mateo.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/NeuralConsciente",
+        "instagram": "https://www.instagram.com/neuralconsciente"
+      }
+    },
+    {
+      "id": "prof-004",
+      "order": 4,
+      "name": "Juan Esteban Bustamante",
+      "role": "ENTRENADOR",
+      "description": "Soy el Profe de la jornada de la mañana, con estudios en Entrenamiento Muscular Funcional y Entrenamiento Personalizado, soy una persona apasionada por el entrenamiento de fuerza.",
+      "photo": "images/juanes.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/NeuralConsciente",
+        "instagram": "https://instagram.com/juanesbusta?igshid=MzNlNGNkZWQ4Mg=="
+      }
+    }
+  ]
+}
